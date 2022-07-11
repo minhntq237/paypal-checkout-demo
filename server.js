@@ -1,16 +1,19 @@
+const data = require("./data.json")
+
 require("dotenv").config()
 
 const express = require("express")
 const app = express()
+
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(express.json())
 
 const paypal = require("@paypal/checkout-server-sdk")
-const Environment =
-  process.env.NODE_ENV === "production"
-    ? paypal.core.LiveEnvironment
-    : paypal.core.SandboxEnvironment
+const Environment = paypal.core.LiveEnvironment
+
+/* paypal.core.LiveEnvironment */
+
 const paypalClient = new paypal.core.PayPalHttpClient(
   new Environment(
     process.env.PAYPAL_CLIENT_ID,
@@ -18,10 +21,7 @@ const paypalClient = new paypal.core.PayPalHttpClient(
   )
 )
 
-const storeItems = new Map([
-  [1, { price: 100, name: "Learn React Today" }],
-  [2, { price: 200, name: "Learn CSS Today" }],
-])
+const storeItems = new Map([[1, data["storeItem"]]])
 
 app.get("/", (req, res) => {
   res.render("index", {
