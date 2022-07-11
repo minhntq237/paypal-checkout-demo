@@ -10,7 +10,7 @@ app.use(express.static("public"))
 app.use(express.json())
 
 const paypal = require("@paypal/checkout-server-sdk")
-const Environment = paypal.core.LiveEnvironment
+const Environment = paypal.core.SandboxEnvironment
 
 /* paypal.core.SandboxEnvironment
    paypal.core.LiveEnvironment */
