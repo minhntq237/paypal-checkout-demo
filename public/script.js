@@ -29,10 +29,9 @@ paypal
     },
     onApprove: function (data, actions) {
       return actions.order.capture().then(function(details){
-        /* console.log(details) */
-        /* paymentDetails = JSON.parse(details)
-        console.log(paymentDetails) */
-        window.location.replace("/on-success")
+        /* paymentDetails = JSON.parse(details) */
+        console.log(details) 
+        /* window.location.replace("/on-success") */
       })
     },
     onCancel: function (data) {
