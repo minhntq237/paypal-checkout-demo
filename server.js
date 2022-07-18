@@ -1,9 +1,10 @@
-const data = require("./data.json")
+const data = require("./public/data.json")
 
 require("dotenv").config()
 
 const express = require("express")
 const app = express()
+var path = require('path')
 
 app.set("view engine", "ejs")
 app.use(express.static("public"))
@@ -24,7 +25,7 @@ const paypalClient = new paypal.core.PayPalHttpClient(
 
 const storeItems = new Map([[1, data["storeItem"]]])
 
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { /* '/' auto get public folder */
   res.render("index", {
     paypalClientId: process.env.PAYPAL_CLIENT_ID,
   })
@@ -73,4 +74,17 @@ app.post("/create-order", async (req, res) => {
   }
 })
 
-app.listen(3000)
+app.get('/on-success', (req, res) => {
+  res.sendFile(path.resolve('./views/onSuccess.html'))
+});
+
+app.get('/on-cancel', (req, res) => {
+  res.sendFile(path.resolve('./views/onCancel.html'))
+});
+
+app.listen(3000, function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log('express server running');
+});
