@@ -4,14 +4,19 @@ require("dotenv").config()
 
 const express = require("express")
 const app = express()
-var path = require('path')
+const paypal = require("@paypal/checkout-server-sdk")
 
+var path = require('path')
+var cors = require('cors')
+
+app.use(cors())
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(express.json())
 
-const paypal = require("@paypal/checkout-server-sdk")
-const Environment = paypal.core.LiveEnvironment
+
+
+const Environment = paypal.core.SandboxEnvironment
 
 /* paypal.core.SandboxEnvironment
    paypal.core.LiveEnvironment */
@@ -80,6 +85,11 @@ app.get('/on-success', (req, res) => {
 
 app.get('/on-cancel', (req, res) => {
   res.sendFile(path.resolve('./views/onCancel.html'))
+});
+
+app.post('/add', function(req,res) {
+  console.log(req.body.name);
+  res.json(req.body.name);
 });
 
 app.listen(3000, function (err) {
