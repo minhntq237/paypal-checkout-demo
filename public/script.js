@@ -33,7 +33,7 @@ paypal
         /* window.location.replace("/on-success") */
 
         async function sendTransactionDetails() {
-          const response = await fetch("https://paypal-checkout-demo-k2rpp.ondigitalocean.app//add", {
+          const response = await fetch("/add", {
             method: 'POST',
             headers: {
               "Content-Type":"application/json",
