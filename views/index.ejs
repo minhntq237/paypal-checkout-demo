@@ -4,12 +4,56 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Payment</title>
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+
   <script src="https://www.paypal.com/sdk/js?client-id=<%= paypalClientId %>"></script>
   <script src="/script.js" defer></script>
   <script type="text/javascript" src="data.json"></script>
 </head>
 <body>
-  <div id="paypal"></div>
+  <div class="container">
+    <div class="page-title">
+      <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
+      Checkout
+    </div>
+  </div>
+  <div class="container">
+    <div class="payment-split">
+      <div class="payment-split-left">
+        <div class="payment-title">Payment</div>
+        <div class="payment-description">Select a payment method below</div>
+
+        <div class="payment-methods" id="payment-methods">
+          <div id="paypal"></div>
+        </div>
+        <div class="payment-feedback" id="payment-feedback"></div>
+
+      </div>
+      <div class="payment-split-right">
+        <div class="payment-details">
+          <div class="payment-details-item">
+            <div class="payment-details-item-image">
+              <img src="/assets/item.PNG">
+            </div>
+            <div class="payment-details-item-data">
+              <div class="payment-details-item-title">Software license</div>
+              <div class="payment-details-item-description">
+                A license key to use the software for one month
+              </div>
+            </div>
+          </div>
+          <div class="payment-details-split">
+            <div class="payment-details-split-left">Total:</div>
+            <div class="payment-details-split-right displaysum">
+              <span class="currency">$</span>2 <span class="currency">USD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

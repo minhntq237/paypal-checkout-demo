@@ -18,8 +18,6 @@ app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(express.json())
 
-
-
 const Environment = paypal.core.LiveEnvironment
 
 /* paypal.core.SandboxEnvironment
