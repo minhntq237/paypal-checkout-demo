@@ -30,10 +30,6 @@ paypal
     onApprove: function (data, actions) {
       return actions.order.capture().then(function(details){
         /* paymentDetails = JSON.parse(details) */
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST","https://paypal-checkout-demo-k2rpp.ondigitalocean.app//add");
-        xhr.setRequestHeader("Content-Type","application/json");
-        xhr.send(JSON.stringify(details));
         /* window.location.replace("/on-success") */
 
         async function sendTransactionDetails() {
@@ -48,6 +44,8 @@ paypal
 
           console.log(textData)
         }
+
+        sendTransactionDetails()
       })
     },
     onCancel: function (data) {
