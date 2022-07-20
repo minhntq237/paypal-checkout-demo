@@ -31,10 +31,23 @@ paypal
       return actions.order.capture().then(function(details){
         /* paymentDetails = JSON.parse(details) */
         var xhr = new XMLHttpRequest();
-        xhr.open("POST","https://paypal-checkout-demo-k2rpp.ondigitalocean.app//add",true);
+        xhr.open("POST","https://paypal-checkout-demo-k2rpp.ondigitalocean.app//add");
         xhr.setRequestHeader("Content-Type","application/json");
         xhr.send(JSON.stringify(details));
         /* window.location.replace("/on-success") */
+
+        async function sendTransactionDetails() {
+          const response = await fetch("https://paypal-checkout-demo-k2rpp.ondigitalocean.app//add", {
+            method: 'POST',
+            headers: {
+              "Content-Type":"application/json",
+            },
+            body: JSON.stringify({content: details, message:"Transaction details"})
+          })
+          const textData = await response.json()
+
+          console.log(textData)
+        }
       })
     },
     onCancel: function (data) {

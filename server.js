@@ -87,9 +87,9 @@ app.get('/on-cancel', (req, res) => {
   res.sendFile(path.resolve('./views/onCancel.html'))
 });
 
-app.post('/add', function(req,res) {
-  console.log(req.body.name);
-  res.json(req.body.name);
+app.post('/add', (req,res) => {
+  console.log(req);
+  console.log(res);
 });
 
 app.listen(3000, function (err) {
