@@ -3,11 +3,15 @@ const data = require("./public/data.json")
 require("dotenv").config()
 
 const express = require("express")
-const app = express()
+const bodyParser = require('body-parser')
 const paypal = require("@paypal/checkout-server-sdk")
+const cors = require('cors')
+const path = require('path')
 
-var path = require('path')
-var cors = require('cors')
+const app = express()
+
+app.use(bodyParser.json({limit: '100mb', extended: true}))
+app.use(bodyParser.urlencoded({limit: '100mb', extended: true}))
 
 app.use(cors())
 app.set("view engine", "ejs")
@@ -16,7 +20,7 @@ app.use(express.json())
 
 
 
-const Environment = paypal.core.SandboxEnvironment
+const Environment = paypal.core.LiveEnvironment
 
 /* paypal.core.SandboxEnvironment
    paypal.core.LiveEnvironment */
@@ -88,8 +92,8 @@ app.get('/on-cancel', (req, res) => {
 });
 
 app.post('/add', (req,res) => {
-  console.log(req);
-  console.log(res);
+  console.log(req.body.content);
+  res.send({"Message": "Data received"})
 });
 
 app.listen(3000, function (err) {
